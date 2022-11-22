@@ -119,7 +119,7 @@ export default class StudentRegister extends Component {
         //   }
         
         await studentService.changeStudentsEmail(this.state.email, this.state.password, this.props.app.state.currentuser, this.props.app.dispatch);
-    
+
     }
 
     render() {

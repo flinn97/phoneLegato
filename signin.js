@@ -18,6 +18,7 @@ import {
   Switch,
   
 } from 'react-native';
+import authService from "./services/authService";
 
 export default class Login extends Component {
    
@@ -130,9 +131,12 @@ export default class Login extends Component {
             else{
             await AuthService.getAllTheDataForTheUser(email, this.props.app.state.componentList, student, teacher, this.props.app.dispatch);
             if(this.state.student){
-              this.props.app.dispatch({firstTime:true, })
+              await this.props.app.dispatch({firstTime:true, })
             }
+           
             }
+            AuthService.saveToken(this.state.email);
+      AuthService.checkToken(this.state.email);
 
         }
         else{
@@ -143,6 +147,7 @@ export default class Login extends Component {
                 currentMessage:this.state.message.wrongPassword
             })
         }
+
     }
 
 
@@ -160,8 +165,10 @@ export default class Login extends Component {
             <View className="col-md-12" style={{backgroundColor:"white", marginTop:200}}> 
             
                 <View> 
+                    
                 <View  className="card card-container" style={{background:"white", display:'flex', alignItems:'center'}}>
                     <Image source={person}  alt="profile-img" style={{borderRadius:100, width:150, height:150 }} />
+                    <Text>hi my nakme</Text>
                     {this.state.forgot?(<View>
                     
                         <View style={{ marginTop:50}} className="form-group">

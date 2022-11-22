@@ -53,8 +53,9 @@ render(){
         app.dispatch({currentstudent:student, index:i+1, updateCircle:true, updateProgress:true});
       }}><Text>Switch student</Text></TouchableOpacity>
       <TouchableOpacity onPress={()=>{
-        this.props.app.dispatch({currentuser: undefined, currentstudent:undefined});
-        DevSettings.reload();
+        this.props.app.dispatch({currentuser: undefined, currentstudent:undefined, });
+        state.componentList.clearList();
+        // DevSettings.reload();
         }}><Text style={{color:'red', marginTop:10}}>Logout</Text></TouchableOpacity>
       </View>
       </View>

@@ -212,6 +212,9 @@ class StudentService{
       } 
       await student.setJson({...s, firstTime:false});
       await student.getOperationsFactory().cleanPrepareRun({update:[student]});    
+      authService.requestUserPermission();
+      authService.saveToken(email);
+      authService.checkToken(email);
       await dispatch({login:true, firstTime:false});
   }
 

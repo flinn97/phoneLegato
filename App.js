@@ -131,6 +131,7 @@ class App extends Component{
     this.setState({
       componentList:componentList
     })
+    
     // const user = await AsyncStorage.getItem('YOUR-KEY');
     // if(user){
     //   console.log(user);

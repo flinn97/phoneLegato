@@ -46,6 +46,7 @@
 		2D2DACA52913248B003A24E2 /* click1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click1.wav; sourceTree = "<group>"; };
 		2D2DACA62913248B003A24E2 /* click2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click2.mp3; sourceTree = "<group>"; };
 		2D2DACA72913248B003A24E2 /* click2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click2.wav; sourceTree = "<group>"; };
+		2D2DACAE291438EF003A24E2 /* finalLegato.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = finalLegato.entitlements; path = finalLegato/finalLegato.entitlements; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-finalLegato.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-finalLegato.debug.xcconfig"; path = "Target Support Files/Pods-finalLegato/Pods-finalLegato.debug.xcconfig"; sourceTree = "<group>"; };
 		4B0F33922A48D2101B4C4444 /* Pods_finalLegato.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_finalLegato.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5709B34CF0A7D63546082F79 /* Pods-finalLegato.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-finalLegato.release.xcconfig"; path = "Target Support Files/Pods-finalLegato/Pods-finalLegato.release.xcconfig"; sourceTree = "<group>"; };
@@ -96,6 +97,7 @@
 		13B07FAE1A68108700A75B9A /* finalLegato */ = {
 			isa = PBXGroup;
 			children = (
+				2D2DACAE291438EF003A24E2 /* finalLegato.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -519,6 +521,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = finalLegato/finalLegato.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8RL8R4B6Y4;
 				ENABLE_BITCODE = NO;
@@ -549,6 +552,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = finalLegato/finalLegato.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8RL8R4B6Y4;
 				INFOPLIST_FILE = finalLegato/Info.plist;

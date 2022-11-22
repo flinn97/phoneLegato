@@ -2,6 +2,7 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
+import messaging from '@react-native-firebase/messaging';
 // import { doc, getDocs, collection, getDoc, updateDoc, addDoc, where, query, setDoc, deleteDoc, onSnapshot, querySnapshot, Timestamp, serverTimestamp, orderBy  } from '@react-native-firebase/firestore';
 // import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, getAuth,sendPasswordResetEmail, updateEmail, deleteUser  } from "@react-native-firebase/auth";
 
@@ -9,6 +10,39 @@ import storage from '@react-native-firebase/storage';
 
 //be sure to upload axios. This is my controller for everything that I do for the backend.
 class AuthService {
+    async saveTokenToDatabase(email, token) {
+
+        await firestore()
+          .collection('users')
+          .doc(email)
+          .update({
+            tokens: firestore.FieldValue.arrayUnion(token),
+          });
+          return token
+      }
+
+    async saveToken(email){
+       let token = await messaging()
+      .getToken()
+      .then(token => {
+        return this.saveTokenToDatabase(email, token);
+      });
+      
+    }
+    async checkToken(email){
+        await messaging().onTokenRefresh (token => {
+            return this.saveTokenToDatabase(email, token);
+          });
+    }
+
+    async requestUserPermission() {
+        const authorizationStatus = await messaging().requestPermission();
+      
+        if (authorizationStatus) {
+          console.log('Permission status:', authorizationStatus);
+        }
+      }
+
 /**
  * 
  * @param {*} role 
@@ -106,6 +140,7 @@ async login(email, password, componentList, student, teacher) {
             const errorCode = error.code;
             const errorMessage = error.message;
         });
+    
     return user;
 }
 
