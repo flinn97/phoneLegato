@@ -106,40 +106,40 @@ render(){
   };
   return (
     <View style={backgroundStyle}>
-      <TouchableOpacity onPress={()=>{app.dispatch({popupSwitch:""})}} style={{position:'absolute', top:30, right:30, zIndex:1003}}><Text>X</Text></TouchableOpacity>
+      <TouchableOpacity onPress={()=>{app.dispatch({popupSwitch:""})}} style={{position:'absolute', top:30, right:30, zIndex:1003}}><Text  style={{color:"black"}}>X</Text></TouchableOpacity>
     <View  style={{ position:'absolute', width:'100%', height:'100%', backgroundColor:'grey', opacity:.7, zIndex:1001 }}>
  </View>
  <SafeAreaView style={{width:'90%', height:'85%', marginTop:20, backgroundColor:"white", zIndex:1002, display:'flex', alignItems:'center', }}>
-  <Text style={{fontSize:25, marginTop:30}}>Profile</Text>
+  <Text style={{fontSize:25, marginTop:30, color:"black"}}>Profile</Text>
   <ScrollView >
     <View style={{width:'100%',display:'flex', alignItems:'center', marginBottom:40 }}>
       {currentstudent.getJson().picURL.length>70?(<Image source={{uri:currentstudent.getJson().picURL}}  style={{width:100, height:100, marginTop:20, borderRadius:100}}/>):(
   <Image source={studentService.pic(currentstudent.getJson().picURL)}  style={{width:100, height:100, marginTop:20, borderRadius:100}}/>)}
   <View>
-  <Text style={{fontSize:20, width:'100%', marginTop:30}}>Stundent Info:</Text>
+  <Text style={{fontSize:20, width:'100%', marginTop:30, color:"black"}}>Stundent Info:</Text>
 
-  <Text style={{marginTop:10, }}>First Name</Text>
+  <Text style={{marginTop:10, color:"black"}}>First Name</Text>
   <InputComponent app={app} obj={currentstudent} name="firstName"  />
-  <Text style={{marginTop:10, }}>Last Name</Text>
+  <Text style={{marginTop:10, color:"black"}}>Last Name</Text>
   <InputComponent app={app} obj={currentstudent} name="lastName" />
-  <Text style={{marginTop:10, }}>Parent</Text>
+  <Text style={{marginTop:10, color:"black"}}>Parent</Text>
 
   <InputComponent app={app} obj={currentstudent} name="Parent" />
-  <Text style={{marginTop:10, }}>Phone</Text>
+  <Text style={{marginTop:10, color:"black"}}>Phone</Text>
 
   <InputComponent app={app} obj={currentstudent} name="Phone" />
-  <Text style={{marginTop:10, }}>Address</Text>
+  <Text style={{marginTop:10, color:"black"}}>Address</Text>
 
   {/* <InputComponent app={app} obj={currentstudent} name="email" /> */}
   <InputComponent app={app} obj={currentstudent} name="address" />
-  <Text style={{marginTop:10,}}>Check Box Tracking</Text>
+  <Text style={{marginTop:10, color:"black"}}>Check Box Tracking</Text>
 
   <SwitchComponent obj={currentstudent} name="check" />
-  <Text style={{marginTop:10, }}>Time Tracking</Text>
+  <Text style={{marginTop:10, color:"black"}}>Time Tracking</Text>
 
   <SwitchComponent obj={currentstudent} name="trackTime" />
   </View>
-  <Text style={{fontSize:20, width:'100%', marginTop:30}}>Schedule:</Text>
+  <Text style={{fontSize:20, width:'100%', marginTop:30, color:"black"}}>Schedule:</Text>
   {this.state.objArr?.map((day, index)=>
   <TimeContainer app={app} day ={day}/>
   )}
@@ -149,7 +149,7 @@ render(){
 <TouchableOpacity style={{ width:75, height:30, backgroundColor:'#6C86F4', borderRadius:25, display:'flex', alignItems:'center', justifyContent:"center", marginTop:20, marginBottom:20}} onPress={()=>{
   let list = state.componentList;
   list.getOperationsFactory().cleanPrepareRun({update:currentstudent});
-}}><Text style={{color:'white'}}>Save</Text></TouchableOpacity>
+}}><Text style={{color:'white', color:"black"}}>Save</Text></TouchableOpacity>
  </SafeAreaView>
  </View>
   );

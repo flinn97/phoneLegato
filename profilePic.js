@@ -45,7 +45,7 @@ export default class ProfilePic extends Component{
     }
   }
   componentDidMount(){
-    if(this.props.app.state.currentstudent.getJson().picURL.length>70){
+    if(this.props.app.state.currentstudent?.getJson()?.picURL?.length>70){
       this.setState({pic: this.props.app.state.currentstudent.getJson().picURL})
     }
   }
@@ -78,11 +78,10 @@ export default class ProfilePic extends Component{
     let app=this.props.app;
   let state=app.state;
   let currentstudent=state.currentstudent;
-    await authService.uploadPics(this.state.blob, this.state.path);
+  
+    await authService.uploadPics(this.state.blob, this.state.path, currentstudent);
     currentstudent.setJson({...currentstudent.getJson(), picURL: this.state.pic})
     await this.props.app.dispatch({operataion:"cleanPrepareRun", operate: "update", object: currentstudent, back:false});
-    
-    await currentstudent.getPicSrc(this.state.path);
     this.setState({
       loaded:"Picture Uploaded",
       loading: "Save"
@@ -114,14 +113,14 @@ render(){
  
   return (
     <View style={backgroundStyle}>
-      <TouchableOpacity onPress={()=>{app.dispatch({popupSwitch:""})}} style={{position:'absolute', top:30, right:30, zIndex:1003}}><Text>X</Text></TouchableOpacity>
+      <TouchableOpacity onPress={()=>{app.dispatch({popupSwitch:""})}} style={{position:'absolute', top:30, right:30, zIndex:1003}}><Text style={{color:"black"}}>X</Text></TouchableOpacity>
     <View  style={{ position:'absolute', width:'100%', height:'100%', backgroundColor:'grey', opacity:.7, zIndex:1001 }}>
  </View>
  <View style={{width:'90%', height:'85%', marginTop:20, backgroundColor:"white", zIndex:1002, display:'flex', alignItems:'center', paddingTop:75}}>
   {this.state.pic?(<Image source={{uri: this.state.pic}}  style={{width:200, height:200, borderRadius:100}}/>):(
- <Image source={ studentService.pic(currentstudent.getJson().picURL)}  style={{width:200, height:200, borderRadius:100}}/>)}
+ <Image source={studentService.pic(currentstudent.getJson().picURL)}  style={{width:200, height:200, borderRadius:100}}/>)}
   <SelectFileComponent setPic={this.setPic} app={app} />
-   {this.state.loaded.includes('Pic')&&(<Text>Picture Uploaded</Text>)}<TouchableOpacity onPress={this.handleSubmission} style={{position:"absolute", bottom:0, width:75, height:30, backgroundColor:'#6C86F4', borderRadius:25, display:'flex', alignItems:'center', justifyContent:"center", marginTop:20, marginBottom:20}}>
+   {this.state.loaded.includes('Pic')&&(<Text style={{color:"black"}}>Picture Uploaded</Text>)}<TouchableOpacity onPress={this.handleSubmission} style={{position:"absolute", bottom:0, width:75, height:30, backgroundColor:'#6C86F4', borderRadius:25, display:'flex', alignItems:'center', justifyContent:"center", marginTop:20, marginBottom:20}}>
     <Text style={{color:'white'}}>{this.state.loading}</Text></TouchableOpacity>
  </View>
  </View>

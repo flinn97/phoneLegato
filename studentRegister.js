@@ -117,7 +117,9 @@ export default class StudentRegister extends Component {
         //     })
         //     return
         //   }
-        
+        let user = this.props.app.state.currentuser;
+        user.setJson({...user.getJson(), email: this.state.email})
+        await user.getOperationsFactory().cleanPrepareRun({update: user})
         await studentService.changeStudentsEmail(this.state.email, this.state.password, this.props.app.state.currentuser, this.props.app.dispatch);
 
     }
@@ -140,10 +142,10 @@ export default class StudentRegister extends Component {
 
 <View  className="card card-container" style={{background:"white", display:'flex', alignItems:'center'}}>
 <Image source={person}  alt="profile-img" style={{borderRadius:100, width:150, height:150 }} />
-                        <Text style={{width:300, display:'flex', alignItems:'center', justifyContent:'center', marginTop:20}}>Welcome to Legato Student! Please enter a new email and password to continue.</Text>
+                        <Text style={{width:300, display:'flex', alignItems:'center', justifyContent:'center', marginTop:20, color:"black"}}>Welcome to Legato Student! Please enter a new email and password to continue.</Text>
                         <View>
                                 <View className="form-group" style={{marginTop:30}}>
-                                    <View htmlFor="Email">{this.state.student?(<Text>Code</Text>):(<Text>Email</Text>)}</View>
+                                    <View htmlFor="Email">{this.state.student?(<Text style={{color:"black"}}>Code</Text>):(<Text style={{color:"black"}}>Email</Text>)}</View>
                                     <TextInput
                                       style={{borderColor:"black", borderWidth :1, borderRadius:7, width:250, height:40, marginTop:7}}
                                         onChangeText={(text)=>{
@@ -154,10 +156,10 @@ export default class StudentRegister extends Component {
                                 </View>
                             {!this.state.student&&(
                                 <View className="form-group" style={{marginTop:30}}>
-                                    <Text htmlFor="password">Password</Text>
+                                    <Text style={{color:"black"}} htmlFor="password">Password</Text>
                                     <TextInput
                                     secureTextEntry={true}
-                                      style={{borderColor:"black", borderWidth :1, borderRadius:7, width:250, height:40, marginTop:7}}
+                                      style={{borderColor:"black", borderWidth :1, borderRadius:7, width:250, height:40, marginTop:7, color:"black"}}
                                         onChangeText={(text)=>{
                                           this.setState({password:text})
                                         }}

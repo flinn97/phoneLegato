@@ -3,6 +3,10 @@ import AuthService from "./services/authService";
 import loading from "./assets/loading.gif";
 import logoLegato from "./assets/logo.png";
 import person from './assets/avatar_2x.png'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
+
 // import InputComponent from "./inputComponent";
 import {
   SafeAreaView,
@@ -53,7 +57,9 @@ export default class Login extends Component {
     handleChange = (event) => {
         
         const { name, value } = event.target
-
+        if(name==="email"){
+            value = value.toLowerCase();
+        }
         this.setState({
             [name]: value,
         })
@@ -120,6 +126,18 @@ export default class Login extends Component {
         let user = await AuthService.login(email, password, this.props.app.state.componentList, student, teacher);
         
         if(user){
+            if(!this.state.student){
+                try {
+                    let json = JSON.stringify(user);
+                    await AsyncStorage.setItem("@userKey",
+                    json
+                    );
+                  } catch (error) {
+                    // Error saving data\
+                  }
+              }
+            
+            //   const value = await AsyncStorage.getItem("@userKey");
             if(!student){
               this.setState({
                 messageSwitch:true,
@@ -168,14 +186,14 @@ export default class Login extends Component {
                     
                 <View  className="card card-container" style={{background:"white", display:'flex', alignItems:'center'}}>
                     <Image source={person}  alt="profile-img" style={{borderRadius:100, width:150, height:150 }} />
-                    <Text>hi my nakme</Text>
                     {this.state.forgot?(<View>
                     
                         <View style={{ marginTop:50}} className="form-group">
-                                    <View htmlFor="Email">{this.state.student?(<Text>Code</Text>):(<Text>Please enter your email</Text>)}</View>
+                                    <View htmlFor="Email">{this.state.student?(<Text style={{color:"black"}}>Code</Text>):(<Text style={{color:"black"}}>Please enter your email</Text>)}</View>
                                     <TextInput
-                                      style={{borderColor:"black", borderWidth :1, borderRadius:7, width:250, height:40, marginTop:7}}
+                                      style={{borderColor:"black", borderWidth :1, borderRadius:7, width:250, height:40, marginTop:7, color:"black"}}
                                         onChangeText={(text)=>{
+                                            text = text.toLowerCase();
                                           this.setState({email:text})
                                         }}
                                         value={this.state.value}
@@ -185,10 +203,11 @@ export default class Login extends Component {
                                 </View>):(
                     <View>
                                 <View className="form-group" style={{marginTop:30}}>
-                                    <View htmlFor="Email">{this.state.student?(<Text>Code</Text>):(<Text>Email</Text>)}</View>
+                                    <View htmlFor="Email">{this.state.student?(<Text style={{color:"black"}}>Code</Text>):(<Text style={{color:"black"}}>Email</Text>)}</View>
                                     <TextInput
-                                      style={{borderColor:"black", borderWidth :1, borderRadius:7, width:250, height:40, marginTop:7}}
+                                      style={{borderColor:"black", borderWidth :1, borderRadius:7, width:250, height:40, marginTop:7, color:"black"}}
                                         onChangeText={(text)=>{
+                                            text = text.toLowerCase();
                                           this.setState({email:text})
                                         }}
                                         value={this.state.value}
@@ -196,10 +215,10 @@ export default class Login extends Component {
                                 </View>
                             {!this.state.student&&(
                                 <View className="form-group" style={{marginTop:30}}>
-                                    <Text htmlFor="password">Password</Text>
+                                    <Text style={{color:"black"}} htmlFor="password">Password</Text>
                                     <TextInput
                                     secureTextEntry={true}
-                                      style={{borderColor:"black", borderWidth :1, borderRadius:7, width:250, height:40, marginTop:7}}
+                                      style={{borderColor:"black", borderWidth :1, borderRadius:7, width:250, height:40, marginTop:7, color:"black"}}
                                         onChangeText={(text)=>{
                                           this.setState({password:text})
                                         }}

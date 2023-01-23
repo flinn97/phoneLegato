@@ -41,11 +41,11 @@ render(){
         <ScrollView>
     {homeworks.map((homework, index)=>
     <View key={index} style={{marginBottom:10}}>
-      
-      <Text style={{fontSize:23}}>{homework.getJson().title}</Text>
-      <Text style={{color:'blue', marginBottom:5}}>{homework.getJson().hwlink}</Text>
-      {homework.getJson().description!==""&&(<Text style={{color:'grey', fontSize:17}}>Notes: {homework.getJson().description}</Text>)}
-      
+      <TouchableOpacity onPress={()=>{app.dispatch({popupSwitch:"viewHomework", hwready:true, currentHomework:homework})}}>
+      <Text style={{fontSize:23, color:"black"}}>{homework.getJson()?.title}</Text>
+      <Text style={{color:'blue', marginBottom:5}}>{homework?.getJson().hwlink}</Text>
+      {homework.getJson().description!==""&&(<Text style={{color:'grey', fontSize:17}}>Notes: {homework?.getJson().description}</Text>)}
+      </TouchableOpacity>
 
     </View>
 )}

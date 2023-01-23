@@ -88,14 +88,14 @@ render(){
     <View  style={{ position:'absolute', width:'100%', height:'100%', backgroundColor:'grey', opacity:.7, zIndex:1001 }}>
  </View>
  <View style={{width:'90%', height:'45%', backgroundColor:"white", zIndex:1002, paddingTop:50, display:"flex", alignItems:"center", marginTop:-200 }}>
- <TouchableOpacity onPress={()=>{app.dispatch({popupSwitch:""})}} style={{position:'absolute', top:30, right:30, zIndex:1003}}><Text>X</Text></TouchableOpacity>
-  <Text style={{fontSize:30, marginBottom:30}}>Add Time </Text>
-  <Text style={{fontSize:20, marginBottom:20}}>Select a day to edit time for.</Text>
+ <TouchableOpacity onPress={()=>{app.dispatch({popupSwitch:""})}} style={{position:'absolute', top:30, right:30, zIndex:1003}}><Text style={{color:'black'}}>X</Text></TouchableOpacity>
+  <Text style={{fontSize:30, marginBottom:30, color:'black'}}>Add Time </Text>
+  <Text style={{fontSize:20, marginBottom:20, color:'black'}}>Select a day to edit time for.</Text>
   <DropDownComponent list={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]} 
   handleChange={(day)=>{
     this.setState({forTime:this.getDay(day)})
     }}/>
-  <Text style={{fontSize:20, marginBottom:5, marginTop:25}}>Input Time</Text>
+  <Text style={{fontSize:20, marginBottom:5, marginTop:25, color:'black'}}>Input Time</Text>
 
   <InputComponent width={40} app={app} handleChange ={async (text)=>{
           await this.setState({time:text})

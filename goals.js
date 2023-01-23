@@ -12,6 +12,8 @@ import {
   View,
 } from 'react-native';
 import GoalsList from './goalList';
+import authService from './services/authService';
+
 // import Animated, {
 //   useSharedValue,
 //   withTiming,
@@ -30,7 +32,15 @@ export default class Goals extends Component{
     }
   }
 
-
+  componentDidMount(){
+    let app = this.props.app;
+    let state = app.state;
+    let componentList = state.componentList;
+    let student = state.currentstudent;
+    let teacher = state.email
+    authService.getAllTheDataForTheUser(state.studentEmail, componentList, student.getJson()._id, teacher, app.dispatch);
+    
+  }
 
 
 render(){
@@ -52,7 +62,7 @@ render(){
   };
   return (
     <View  style={backgroundStyle}>
-    <Text style={{fontSize:30, marginBottom:30}}>Goals</Text>
+    <Text style={{fontSize:30, marginBottom:30, color:'black'}}>Goals</Text>
     <View style={{marginBottom:40}}>
     <ProgressCircle app={app} goals={goals} maingoals={mainGoals} />
     </View>

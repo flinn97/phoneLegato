@@ -14,6 +14,8 @@ import {
 import GoalsList from './goalList';
 import PracticeChecks from './practiceChecks';
 import PracticeList from './practiceList';
+import authService from './services/authService';
+
 // import Animated, {
 //   useSharedValue,
 //   withTiming,
@@ -31,7 +33,15 @@ export default class Practice extends Component{
 
     }
   }
-
+  componentDidMount(){
+    let app = this.props.app;
+    let state = app.state;
+    let componentList = state.componentList;
+    let student = state.currentstudent;
+    let teacher = state.email
+    authService.getAllTheDataForTheUser(state.studentEmail, componentList, student.getJson()._id, teacher, app.dispatch);
+    
+  }
 
 render(){
   let app=this.props.app;
@@ -52,10 +62,10 @@ render(){
   };
   return (
     <View  style={backgroundStyle}>
-    <Text style={{fontSize:30}}>Practice</Text>
-    <Text style={{marginTop:30, fontSize:20, marginBottom:20}}>Current Progress</Text>
+    <Text style={{fontSize:30, color:'black'}}>Practice</Text>
+    <Text style={{marginTop:30, fontSize:20, marginBottom:20, color:'black'}}>Current Progress</Text>
     {(!currentstudent.getJson().check && !currentstudent.getJson().trackTime)?(<></>):(<PracticeChecks app={app}/>)}
-    {currentstudent.getJson().trackTime && (<TouchableOpacity style={{marginTop:15,}} onPress={app.dispatch.bind(this,{popupSwitch: "addTimes"})}><Text>+ Add Time</Text></TouchableOpacity>)}
+    {currentstudent.getJson().trackTime && (<TouchableOpacity style={{marginTop:15,}} onPress={app.dispatch.bind(this,{popupSwitch: "addTimes"})}><Text style={{color:'black'}}>+ Add Time</Text></TouchableOpacity>)}
     <PracticeList app={app}/>
  </View>
   );

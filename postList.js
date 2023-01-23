@@ -25,12 +25,30 @@ import studentService from './services/studentService.js';
 export default class PostList extends Component{
   constructor(props){
     super(props);
+    this.menuSlide=this.menuSlide.bind(this);
         this.state={
           check: false,
 
     }
   }
+  async menuSlide(post){
+    let app=this.props.app;
+     await app.dispatch({
+        context:true
+      })  
 
+      for(let i=-450; i<=0; i+=50){
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+                await delay(1);
+                app.dispatch({
+          contextBottom:i,
+        })
+      }
+      this.props.app.dispatch({fog:true, contextContent: post, reportUser: post.getJson().owner})
+
+    
+
+  }
 
 
 
@@ -47,12 +65,14 @@ render(){
     <View style={{width:"100%", padding:10, height:"70%", }}>
       <SafeAreaView style={{width:"100%",  }}>
       <ScrollView>
-      {posts.map((post, index)=>
-      <View style={{display:'flex',  width:'100%', marginTop:10}} key={index}>
+      {posts.map((post, index)=><>
+      {(!Object.keys(currentstudent.getJson().blocked).includes(post.getJson().owner) &&
+      !Object.keys(currentstudent.getJson().hidden).includes(post.getJson()._id)) && 
+      <TouchableOpacity onLongPress={this.menuSlide.bind(this, post)} style={{display:'flex',  width:'100%', marginTop:10}} key={index}>
         {post.getJson().student?(
           <View style={{alignSelf:"flex-end", display:'flex', flexDirection:'row'}}>
             <View style={{backgroundColor:"#6C86F4", display:'flex', justifyContent:'center', padding:10, borderRadius:10, marginRight:7}}>
-            <Text>{post.getJson().content}</Text>
+            <Text style={{color:'black'}}>{post.getJson().content}</Text>
 
             </View>
             {studentService.pic(post.getJson().picURL).length>70?(
@@ -66,13 +86,13 @@ render(){
           
             <Image source={studentService.pic(post.getJson().picURL)} style={{width:50, height:50, borderRadius:100}}/>)}
         <View style={{backgroundColor:"#f2f1f6", display:'flex', justifyContent:'center', padding:10, borderRadius:10, marginLeft:7}}>
-          <Text>{post.getJson().content}</Text>
+          <Text style={{color:'black'}}>{post.getJson().content}</Text>
         </View>
        
       </View>)}
 
 
-      </View>
+      </TouchableOpacity>}</>
   )}
     </ScrollView></SafeAreaView></View> 
   );

@@ -100,7 +100,7 @@ render(){
             <Image source={studentService.pic(currentstudent.getJson().picURL)} style={{width:50, height:50, borderRadius:100}}/>
           )}</TouchableOpacity>
         <View style={{marginTop:7, marginLeft:10}}>
-          <Text>{currentstudent.getJson().firstName} {currentstudent.getJson().lastName}</Text>
+          <Text style={{color:"black"}}>{currentstudent.getJson().firstName} {currentstudent.getJson().lastName}</Text>
           <TouchableOpacity style={{marginTop:3}} onPress={()=>{dispatch({ popupSwitch:"profile"})}} ><Text style={{fontSize:10}}>View profile</Text></TouchableOpacity>
         </View>
       </View>

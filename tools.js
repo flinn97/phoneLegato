@@ -11,7 +11,6 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import GoalsList from './goalList';
 import Metro from './metro';
 // import Animated, {
 //   useSharedValue,
@@ -20,7 +19,6 @@ import Metro from './metro';
 //   Easing,
 // } from 'react-native-reanimated';
 // import CircularProgress from 'react-native-circular-progress-indicator';
-import ProgressCircle from './progressCircle';
 import Timer from './timer';
 export default class Tools extends Component{
   constructor(props){
@@ -37,8 +35,6 @@ export default class Tools extends Component{
 
 render(){
   let app=this.props.app;
-  let state=app.state;
-  let currentstudent=state.currentstudent;
 
   // const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {

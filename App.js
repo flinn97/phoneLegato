@@ -14,6 +14,8 @@ import {
 } from 'react-native';
 import authService from './services/authService';
 import Dispatch from './dispatch';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 class App extends Component{
   constructor(props){
     super(props);
@@ -30,6 +32,8 @@ class App extends Component{
       index:0,
       back: true, 
       bottom: -700,
+      contextBottom: -500,
+          context:false,
           check:false
 
     }
@@ -37,14 +41,18 @@ class App extends Component{
 
   async menuSlide(){
     if(this.state.positionSideBar===-300){
+
       for(let i=-300; i<=0; i+=25){
+
         const delay = ms => new Promise(res => setTimeout(res, ms));
                 await delay(1);
+
         this.setState({
           positionSideBar:i,
           fog:true,          
         })
       }
+
     }
     else{
       for(let i=0; i>=-300; i-=25){
@@ -80,7 +88,6 @@ class App extends Component{
     if(this.state.backend!==undefined &&this.state.back){
         //
         await this.setState({backend: undefined, updateCircle:true});
-        // console.log(this.state.backendUpdate)
         authService.dispatch(this.state.backendUpdate, this.state.email);  
         if(this.state.check &&this.state.bottom===-700){
           this.setState({
@@ -127,18 +134,44 @@ class App extends Component{
 
   }
   async componentDidMount(){
+    
     let componentList= await this.state.componentListInterface.createComponentList();
     this.setState({
       componentList:componentList
     })
-    
-    // const user = await AsyncStorage.getItem('YOUR-KEY');
-    // if(user){
-    //   console.log(user);
-
-    // }
-
+    try {
+      
+      const value = await AsyncStorage.getItem('@userKey');
+      if (value !== null) {
+        const json = JSON.parse(value);
+        let student = false;
+        let teacher = false;
+        let s = await authService.getStudentsTeacher(json.email);
+        if(s?.student){
+            student= s._id;
+            teacher= s.email;
+        }
+        await authService.getAllTheDataForTheUser(json.email, this.state.componentList, student, teacher, this.dispatch);
+        
+        if(this.state.student){
+          await this.props.app.dispatch({firstTime:true, })
+        }
+       
+        
+        authService.saveToken(this.state.email);
+  authService.checkToken(this.state.email);
+      
+    }
   }
+    catch (error) {
+      console.log("error,", error)
+    }
+ 
+    
+ 
+      
+  
+}
 
 render(){
   // const isDarkMode = useColorScheme() === 'dark';

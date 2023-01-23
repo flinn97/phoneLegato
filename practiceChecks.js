@@ -45,54 +45,54 @@ render(){
 
   return (
     <View style={{display:'flex', flexDirection:'row'}}>
-      <View style={{marginLeft:9, marginRight:9, display:'flex', alignItems:"center", width:30}}> 
-      <Text style={{marginBottom:7}}>Mon</Text>
-      <Text>
+      <View style={{marginLeft:6, marginRight:6, display:'flex', alignItems:"center", width:30}}> 
+      <Text style={{marginBottom:7, fontSize:14, color:"black"}}>Mon</Text>
+      <Text style={{color:"black"}}>
     {currentstudent?.getJson().check && (<Checkbox checked={currentstudent.getJson().checked.mon} check={this.check.bind(this, 'mon')} labelColor="#56ba8e" color="#56ba8e"/> )}
     </Text>
-    {currentstudent?.getJson().trackTime && (<Text>{currentstudent.getJson().time.mon}</Text>)}
+    {currentstudent?.getJson().trackTime && (<Text style={{color:"black"}}>{currentstudent.getJson().time.mon}</Text>)}
     </View >
-    <View style={{marginLeft:9, marginRight:9, display:'flex', alignItems:"center", width:31}}> 
-      <Text style={{marginBottom:7}}>Tues</Text>
-      <Text>
+    <View style={{marginLeft:6, marginRight:6, display:'flex', alignItems:"center", width:31}}> 
+      <Text style={{marginBottom:7, fontSize:14, color:"black"}}>Tues</Text>
+      <Text style={{color:"black"}}>
       {currentstudent?.getJson().check && (<Checkbox checked={currentstudent.getJson().checked.tues} check={this.check.bind(this, 'tues')} labelColor="#56ba8e" color="#56ba8e"/> )}
     </Text>
-    {currentstudent?.getJson().trackTime && (<Text>{currentstudent.getJson().time.tues}</Text>)}
+    {currentstudent?.getJson().trackTime && (<Text style={{color:"black"}}>{currentstudent.getJson().time.tues}</Text>)}
     </View>
-    <View style={{marginLeft:9, marginRight:9, display:'flex', alignItems:"center", width:30}}> 
-      <Text style={{marginBottom:7}}>Wed</Text>
-      <Text>
+    <View style={{marginLeft:6, marginRight:6, display:'flex', alignItems:"center", width:30}}> 
+      <Text style={{marginBottom:7, fontSize:14, color:"black"}}>Wed</Text>
+      <Text style={{color:"black"}}>
       {currentstudent?.getJson().check && (<Checkbox checked={currentstudent.getJson().checked.wed} check={this.check.bind(this, 'wed')} labelColor="#56ba8e" color="#56ba8e"/> )}
     </Text>
-    {currentstudent?.getJson().trackTime && (<Text>{currentstudent.getJson().time.wed}</Text>)}
+    {currentstudent?.getJson().trackTime && (<Text style={{color:"black"}}>{currentstudent.getJson().time.wed}</Text>)}
     </View>
-    <View style={{marginLeft:9, marginRight:9, display:'flex', alignItems:"center", width:32}}> 
-      <Text style={{marginBottom:7}}>Thur</Text>
-      <Text>
+    <View style={{marginLeft:6, marginRight:6, display:'flex', alignItems:"center", width:32}}> 
+      <Text style={{marginBottom:7, fontSize:14, color:"black"}}>Thur</Text>
+      <Text style={{color:"black"}}>
       {currentstudent?.getJson().check && (<Checkbox checked={currentstudent.getJson().checked.thur} check={this.check.bind(this, 'thur')} labelColor="#56ba8e" color="#56ba8e"/>)}
     </Text> 
-    {currentstudent?.getJson().trackTime && (<Text>{currentstudent.getJson().time.thur}</Text>)}
+    {currentstudent?.getJson().trackTime && (<Text style={{color:"black"}}>{currentstudent.getJson().time.thur}</Text>)}
     </View>
-    <View style={{marginLeft:9, marginRight:9, display:'flex', alignItems:"center", width:30}}> 
-      <Text style={{marginBottom:7}}>Fri</Text>
-      <Text>
+    <View style={{marginLeft:6, marginRight:6, display:'flex', alignItems:"center", width:30}}> 
+      <Text style={{marginBottom:7, fontSize:14, color:"black"}}>Fri</Text>
+      <Text style={{color:"black"}}>
       {currentstudent?.getJson().check && (<Checkbox checked={currentstudent.getJson().checked.fri} check={this.check.bind(this, 'fri')} labelColor="#56ba8e" color="#56ba8e"/> )}
     </Text>
-    {currentstudent?.getJson().trackTime && (<Text>{currentstudent.getJson().time.fri}</Text>)}
+    {currentstudent?.getJson().trackTime && (<Text style={{color:"black"}}>{currentstudent.getJson().time.fri}</Text>)}
     </View>
-    <View style={{marginLeft:9, marginRight:9, display:'flex', alignItems:"center", width:30}}> 
-      <Text style={{marginBottom:7}}>Sat</Text>
-      <Text>
+    <View style={{marginLeft:6, marginRight:6, display:'flex', alignItems:"center", width:30}}> 
+      <Text style={{marginBottom:7, fontSize:14,color:"black"}}>Sat</Text>
+      <Text style={{color:"black"}}>
       {currentstudent?.getJson().check && (<Checkbox checked={currentstudent.getJson().checked.sat} check={this.check.bind(this, 'sat')} labelColor="#56ba8e" color="#56ba8e"/> )}
     </Text>
-    {currentstudent?.getJson().trackTime && (<Text>{currentstudent.getJson().time.sat}</Text>)}
+    {currentstudent?.getJson().trackTime && (<Text style={{color:"black"}}>{currentstudent.getJson().time.sat}</Text>)}
     </View>
-    <View style={{marginLeft:9, marginRight:9, display:'flex', alignItems:"center", width:30}}> 
-      <Text style={{marginBottom:7}}>Sun</Text>
-      <Text>
+    <View style={{marginLeft:6, marginRight:6, display:'flex', alignItems:"center", width:30}}> 
+      <Text style={{marginBottom:7, fontSize:14, color:"black"}}>Sun</Text>
+      <Text style={{color:"black"}}>
       {currentstudent?.getJson().check && (<Checkbox checked={currentstudent.getJson().checked.sun} check={this.check.bind(this, 'sun')} labelColor="#56ba8e" color="#56ba8e"/> )}
     </Text>
-    {currentstudent?.getJson().trackTime && (<Text>{currentstudent.getJson().time.sun}</Text>)}
+    {currentstudent?.getJson().trackTime && (<Text style={{color:"black"}}>{currentstudent.getJson().time.sun}</Text>)}
     </View>
 
     

@@ -58,7 +58,6 @@ render(){
     {/* <InputComponent app={app} handleChange={(text)=>{
       if(Number.isInteger(parseInt(text))){
         let i = parseInt(text);
-        console.log(MetronomeModule)
         if(i>30){
           MetronomeModule.setBPM(i);
 

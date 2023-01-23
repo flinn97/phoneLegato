@@ -56,7 +56,7 @@ render(){
  
   return (
     <View style={{padding:3, display:'flex', flexDirection:'row', justifyContent:'center'}} >
-      <Text>{this.state.time}</Text>
+      <Text style={{color:'black'}}>{this.state.time}</Text>
       {/* <TextInput
         style={{width:50, height:30, borderWidth:1}}
         // onChangeText={onChangeText}

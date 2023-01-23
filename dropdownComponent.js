@@ -34,7 +34,7 @@ export default class DropDownComponent extends Component{
         this.state={
           list: this.props.list,
           currentItem: undefined,
-          placeHolder: this.props.placeHolder,
+          firstItem: this.props.firstItem,
           showList: false
           
 
@@ -48,7 +48,7 @@ render(){
   return (
     <View style={{ zIndex:1000}}>
       <TouchableOpacity onPress={()=>{this.setState({showList:!this.state.showList})}} style={{borderWidth:1, width:200, height:35, display:'flex', flexDirection:'row', alignItems:"center"}} >
-        <Text style={{fontSize:20, marginLeft:10}}>{this.state.currentItem===undefined?this.props.placeHolder:this.state.currentItem}</Text>
+        <Text style={{fontSize:20, marginLeft:10, color:'black'}}>{this.state.currentItem===undefined?this.props.firstItem:this.state.currentItem}</Text>
       <Image source={downArrow} style={{position:"absolute", right:0}}/></TouchableOpacity>
       <View style={{position:"absolute", shadowColor: '#171717', top:35, backgroundColor:'white', width:200, 
     shadowOffset: {width: 0, height: 4},
@@ -62,7 +62,7 @@ render(){
             if(this.props.handleChange){
               this.props.handleChange(item)
             }
-          }} key={index}><Text style={{fontSize:20}}>{item}</Text></TouchableOpacity>
+          }} key={index}><Text style={{fontSize:20, color:'black'}}>{item}</Text></TouchableOpacity>
           )}
         </View>
       )}

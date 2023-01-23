@@ -59,14 +59,14 @@ render(){
   };
   return (
     <View style={backgroundStyle}>
-      <TouchableOpacity onPress={()=>{app.dispatch({popupSwitch:"", currentBadge:undefined})}} style={{position:'absolute', top:30, right:30, zIndex:1003}}><Text>X</Text></TouchableOpacity>
+      <TouchableOpacity onPress={()=>{app.dispatch({popupSwitch:"", currentBadge:undefined})}} style={{position:'absolute', top:30, right:30, zIndex:1003}}><Text style={{color:"black"}}>X</Text></TouchableOpacity>
     <View  style={{ position:'absolute', width:'100%', height:'100%', backgroundColor:'grey', opacity:.7, zIndex:1001 }}>
  </View>
  <View style={{width:'90%', height:'85%', marginTop:20, paddingTop:70,  backgroundColor:"white", zIndex:1002, display:'flex', alignItems:'center'}}>
- <Text style={{fontSize:30, marginBottom:30}}>{state.currentBadge.getJson().title}</Text>
+ <Text style={{fontSize:30, marginBottom:30, color:"black"}}>{state.currentBadge.getJson().title}</Text>
   <Image source={studentService.badge(state.currentBadge.getJson().picURL)} style={{width:250, height:250}}/>
    
-  <Text style={{ width:'80%', marginTop:50}}>Sescription: {state.currentBadge.getJson().description} </Text>
+  <Text style={{ width:'80%', marginTop:50, color:"black"}}>Description: {state.currentBadge.getJson().description} </Text>
     
 
  </View>

@@ -71,15 +71,15 @@ render(){
     <View  style={backgroundStyle}>
       
       <TouchableOpacity onPress={()=>{app.dispatch({fog:false, bottom:-700, check:false})}}style={{  zIndex:600, position:"absolute", right:10, top:10 }}><Image source={downArrow}/></TouchableOpacity>
-    <Text style={{marginTop:30, fontSize:27}}>Practice</Text>
-    <Text style={{fontSize:30}}>{moment().format("MMM Do")}</Text>
+    <Text style={{marginTop:30, fontSize:27, color:'black'}}>Practice</Text>
+    <Text style={{fontSize:30, color:'black'}}>{moment().format("MMM Do")}</Text>
     <SafeAreaView style={{marginTop:30,  borderWidth:1,  height:360}}>
       <ScrollView>
         <View style={{width:300, height:'100%', padding:10 }}>
       {homeworks.map((homework, index)=>
       <View key={index} style={{marginBottom:10}}>
         
-        <Text style={{fontSize:23}}>{homework.getJson().title}</Text>
+        <Text style={{fontSize:23, color:'black'}}>{homework.getJson().title}</Text>
         <Text style={{color:'blue', marginBottom:5}}>{homework.getJson().hwlink}</Text>
         {homework.getJson().description!==""&&(<Text style={{color:'grey', fontSize:17}}>Notes: {homework.getJson().description}</Text>)}
         
@@ -89,7 +89,7 @@ render(){
   </ScrollView>
     </SafeAreaView>
     <View style={{position:"absolute", bottom:'7%', display:'flex', alignItems:'center'}}>
-      <Text style={{marginBottom:5}}>Log Minutes</Text>
+      <Text style={{marginBottom:5, color:'black'}}>Log Minutes</Text>
       <View style={{ width:150, height:43, borderRadius:25, zIndex:600,  justifyContent:"center", alignItems:"center", backgroundColor:"#f1f1f1",}}>
         <InputComponent fontSize={20} color='#838383' width={30} center={true} border={true} app={app} handleChange ={async (text)=>{
           await this.setState({time:text})
@@ -98,7 +98,7 @@ render(){
         </View>
       <TouchableOpacity onPress={this.markeComplete} style={{ marginTop:20, width:150, height:43, borderRadius:25, zIndex:600,  justifyContent:"center", alignItems:"center", backgroundColor:"#6C86F4",}}>
       {studentService.checked(this.props)?(<Image source={tick} style={{width:30, height:30, }}/>):(
-      <Text style={{color:"white"}}>Mark Complete</Text>)}
+      <Text style={{color:"white", color:'black'}}>Mark Complete</Text>)}
         </TouchableOpacity>
 
 

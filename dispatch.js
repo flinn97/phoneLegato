@@ -6,6 +6,7 @@ import Menu1 from './assets/menu-1.png';
 import Menu2 from './assets/greenMenu.png';
 import AddTimes from './addTimes';
 import StudentRegister from './studentRegister';
+import Eula from './eula';
 import {
   SafeAreaView,
   ScrollView,
@@ -26,6 +27,8 @@ import ViewProfile from './viewProfile';
 import ViewBadge from './viewBadge';
 import ProfilePic from './profilePic';
 import AddTime from './addTime';
+import ViewHomework from './viewHomework';
+import ContextMenu from './contextMenu';
 export default class Dispatch extends Component{
   constructor(props){
     super(props);
@@ -33,6 +36,11 @@ export default class Dispatch extends Component{
         this.state={
    
 
+    }
+  }
+  componentDidMount(){
+    if(!this.props.app.state.currentuser.getJson().eula && !this.props.app.state.firstTime){
+      this.props.app.dispatch({popupSwitch:"eula"});
     }
   }
 
@@ -62,16 +70,24 @@ render(){
       <Check app={app} />
     </View>
     )}
+    {(state.context &&state.contextContent )&&(
+      <View style={{position:'absolute', bottom:state.contextBottom, zIndex:500, width:"95%"}}>
+      <ContextMenu app={app} content={state.contextContent} user={state.currentstudent} reportUser={state.reportUser} name="content"/>
+    </View>
+    )}
     {state.popupSwitch==="viewBadge"&&(<ViewBadge app={app}/>)}
+    {state.popupSwitch==="eula"&&(<Eula app={app}/>)}
+
     {state.popupSwitch==="profile"&&(<ViewProfile app={app}/>)}
     {state.popupSwitch==="profilePic"&&(<ProfilePic app={app}/>)}
     {state.popupSwitch==="addTime"&&(<AddTime app={app}/>)}
     {state.popupSwitch==="addTimes"&&(<AddTimes app={app}/>)}
+    {(state.popupSwitch==="viewHomework" &&state.currentHomework) &&(<ViewHomework app={app}/>)}
     {state.firstTime && (<StudentRegister app={app}/>)}
 
     
      <Menu app={app}/>
-    {state.fog && (<Fog />)}
+    {state.fog && (<Fog menuSlide={this.props.menuSlide} />)}
     {state.switchCase==="dash" && (<Dash app={app}/>)}
     {state.switchCase==="goals"&&(<Goals app={app}/>)}
     {state.switchCase==="practice"&&(<Practice app={app}/>)}

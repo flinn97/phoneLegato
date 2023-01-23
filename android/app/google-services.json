@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "161584597472",
+    "project_id": "legato-1f46f",
+    "storage_bucket": "legato-1f46f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161584597472:android:ef03bba413d5af01874385",
+        "android_client_info": {
+          "package_name": "com.finallegato"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161584597472-2e7jfrt52qddlrjicu9g07ps8i5samvt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7nCZcLBD4WfQctZDoIYCmKAFqIrYWKWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161584597472-2e7jfrt52qddlrjicu9g07ps8i5samvt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "161584597472-67usdp2n2se35jhnq9n5gqgegfd0fnsr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "teachlegato.com"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

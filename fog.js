@@ -39,9 +39,9 @@ render(){
     
   };
   return (
-    <View  style={backgroundStyle}>
+    <TouchableOpacity onPress={this.props.menuSlide} style={backgroundStyle}>
     
-    </View>
+    </TouchableOpacity>
     
   );
 }

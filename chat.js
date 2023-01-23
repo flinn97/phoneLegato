@@ -52,10 +52,19 @@ export default class Chat extends Component{
     }
     let list = componentList.getList("chatroom");
     this.setState({chatrooms:list});
-    
+    // this.getData();
     
       
   
+  
+}
+getData(){
+  let app = this.props.app;
+  let state = app.state;
+  let componentList = state.componentList;
+  let student = state.currentstudent;
+  let teacher = state.email
+  authService.getAllTheDataForTheUser(state.studentEmail, componentList, student.getJson()._id, teacher, app.dispatch);
   
 }
 
@@ -84,7 +93,7 @@ render(){
   return (
    
         <KeyboardAvoidingView behavior="padding" style={backgroundStyle}>
-      <Text style={{fontSize:30,}}>Chat</Text>
+      <Text style={{fontSize:30, color:'black'}}>Chat</Text>
     {!this.state.chat?(<View style={{width:"80%"}}>
       {this.state.chatrooms.map((chatroom, index)=>
       <TouchableOpacity 
@@ -100,8 +109,8 @@ render(){
           </>
         )}
       <View style={{marginTop:3, marginLeft:7}}>
-        <Text style={{fontSize:18}}>{chatroom.getJson().name}</Text>
-        <Text>{list.getList("post", chatroom.getJson()._id, "chatroom")[list.getList("post", chatroom.getJson()._id, "chatroom").length-1]?.getJson().content}</Text></View></TouchableOpacity>
+        <Text style={{fontSize:18, color:'black'}}>{chatroom.getJson().name}</Text>
+        <Text style={{color:'black'}}>{list.getList("post", chatroom.getJson()._id, "chatroom")[list.getList("post", chatroom.getJson()._id, "chatroom").length-1]?.getJson().content}</Text></View></TouchableOpacity>
         
       )}
     </View>):(

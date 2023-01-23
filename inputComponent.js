@@ -40,9 +40,9 @@ export default class InputComponent extends Component{
   }
    async componentDidMount(){
     if(!this.props.prepareOnPress){
-      // console.log(this.props.obj.getJson)
+      if(this.props.obj){
       await this.setState({obj:this.props.obj, value: this.props.obj.getJson()[this.props.name]})
-
+    }
     }
   }
 
@@ -75,10 +75,12 @@ getSplice(word){
 }
 
 handleChange(value){
+
   this.setState({
     value:value
   });
   if(this.props.handleChange!==undefined){
+
     this.props.handleChange(value)
   }
   if(this.state.obj){
@@ -99,9 +101,10 @@ render(){
 
   return (
         <TextInput
+
         onFocus={this.prepareOnPress}
         onBlur={this.onBlurEvent}
-      style={{width:this.props.width? this.props.width:200, height:30, backgroundColor:this.props.backgroundColor, borderWidth: !this.props.border?1:0, borderRadius:7,  marginLeft:this.props.center?10:0, fontSize:this.props.fontSize, color:this.props.color}}
+      style={{width:this.props.width? this.props.width:200, height:30, backgroundColor:this.props.backgroundColor, borderWidth: !this.props.border?1:0, borderRadius:7,  marginLeft:this.props.center?10:0, fontSize:this.props.fontSize, color:this.props.color?this.props.color:"black"}}
         onChangeText={(text)=>{
           this.handleChange(text)
         }}

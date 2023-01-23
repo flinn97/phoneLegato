@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Button, SafeAreaView, StatusBar, StyleSheet, Text,TouchableOpacity} from 'react-native';
 // import DocumentPicker, {types} from 'react-native-document-picker';
-import * as ImagePicker from 'expo-image-picker';
+// import * as ImagePicker from 'expo-image-picker';
+import { launchImageLibrary} from 'react-native-image-picker';
 
 export default class SelectFileComponent extends Component {
 constructor(props){
@@ -15,25 +16,28 @@ constructor(props){
 }
 
   addImage = async () => {
-    let pickerResult = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-    });
+ 
+      let pickerResult = await launchImageLibrary({
+        mediaType: 'photo',
+        
+      });
+      if(pickerResult){
+        this.handleImagePicked(pickerResult)
+      }
+      
+  
+  
     
     
-
-
-    this.handleImagePicked(pickerResult);
   };
 
   handleImagePicked = async (pickerResult) => {
     try {
 
-      if (!pickerResult.cancelled) {
         
-        const uploadUrl = await this.uploadImageAsync(pickerResult.uri);
+        const uploadUrl = await this.uploadImageAsync(pickerResult.assets[0].uri);
         
-      }
+      
     } catch (e) {
       console.log(e);
       alert("Upload failed, sorry.");
@@ -58,7 +62,6 @@ async uploadImageAsync(uri) {
     xhr.open("GET", uri, true);
     xhr.send(null);
   });
-  // console.log("blob", blob);
   this.setState({ uploading: false });
   const fileReaderInstance = new FileReader();
   fileReaderInstance.readAsDataURL(blob); 

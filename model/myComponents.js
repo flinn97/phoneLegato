@@ -17,6 +17,9 @@ class componentBase extends BaseClass{
         user: "",
         type: "",
         collection:"",
+        flagged: false,
+        blocked: false,
+        filtered: false,
     }
 
     userInfo={
@@ -163,7 +166,9 @@ class Student extends componentBase{
         this.updateComponent=this.updateComponent.bind(this);
         this.sync=this.sync.bind(this);
         this.syncItUp=this.syncItUp.bind(this);
-
+        this.block=this.block.bind(this);
+        this.report=this.report.bind(this);
+        this.hide=this.hide.bind(this);
     }
     json={
         ...this.userInfo,
@@ -175,6 +180,7 @@ class Student extends componentBase{
         pastFirstTime: false,
         parent: "",
         address:"",
+        eula: false,
         days: {},
         syncedStudents:{
 
@@ -197,7 +203,34 @@ class Student extends componentBase{
         totalDays: "100",
         totalDaysPracticed:"0",
         daysPracticed: "0",
+        flagged: {},
+        blockCount: 0,
+        hidden: {},
+        blocked: {},
         ...this.checksandtime,
+        }
+        report(report){
+            report.contentID= report.contentID===undefined? "undefined": report.contentID;
+            report.userReported= report.userReported===undefined? "undefined": report.userReported;
+            let flagged = {}
+            flagged[report.userReported] = report.contentID;
+            this.json.flagged=flagged;
+            this.operationsFactory.cleanPrepareRun({update:this})
+        }
+        block(userInfo){
+            userInfo.userID= userInfo.userID===undefined? "undefined": userInfo.userID;
+            userInfo.contentID= userInfo.contentID===undefined? "undefined": userInfo.contentID;
+
+            this.json.blocked[userInfo.userID] = userInfo.contentID;
+            this.json.blockCount++;
+            this.operationsFactory.cleanPrepareRun({update:this})
+        }
+        hide(contentInfo){
+            contentInfo.contentID= contentInfo.contentID===undefined? "undefined": contentInfo.contentID;
+            contentInfo.content= contentInfo.content===undefined? "undefined": contentInfo.content;
+
+            this.json.hidden[contentInfo.contentID] = contentInfo.content;
+            this.operationsFactory.cleanPrepareRun({update:this})
         }
         async changeSchedule(s){
             this.json.days=s
@@ -221,6 +254,7 @@ class Student extends componentBase{
         }
         async getPicSrc(path){
             let pic = await authService.downloadPics(path);
+
             this.json.picURL=pic;
             this.operationsFactory.cleanPrepareRun({update: this});
             
@@ -303,6 +337,7 @@ class ChatRoom extends componentBase{
     
 }
 class Post extends componentBase{
+    
     json={
         _id: "",
         chatroom: "",
@@ -313,7 +348,14 @@ class Post extends componentBase{
         type:"post",
         dateOfPost: moment().format('lll'),
         collection: "",
-        read:false
+        read:false,
+        flagged: false,
+        filtered: false,
+
+    }
+    report(){
+        this.json.flagged=true;
+        this.operationsFactory.cleanPrepareRun({update:this})
 
     }
 }

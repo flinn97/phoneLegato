@@ -3,6 +3,7 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
 import messaging from '@react-native-firebase/messaging';
+
 // import { doc, getDocs, collection, getDoc, updateDoc, addDoc, where, query, setDoc, deleteDoc, onSnapshot, querySnapshot, Timestamp, serverTimestamp, orderBy  } from '@react-native-firebase/firestore';
 // import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, getAuth,sendPasswordResetEmail, updateEmail, deleteUser  } from "@react-native-firebase/auth";
 
@@ -60,7 +61,8 @@ class AuthService {
             switch (key) {
                 case "add":
                     component.collection = email;
-                    component.date = await serverTimestamp();
+                    component.date = await firestore.FieldValue.serverTimestamp() //await serverTimestamp();
+
                     await firestore().collection('users').doc(email).collection('components').doc(component._id).set(component);
                     break;
                 case "del":
@@ -77,16 +79,19 @@ class AuthService {
         let rawData = [];
         if(student){
             await firestore().collection("users").doc(teacher).collection("components").where('owner', '==', student).orderBy("date").get().then(async querySnapshot=>{
+               
                 await componentList.clearList();
                 rawData = [];
                 for (const key in querySnapshot.docs) {
                     let data = querySnapshot.docs[key].data()
                     rawData.push(data);
                 }
+                
                 await componentList.addComponents(rawData, false);
                 if (student) {
+                    
                     let user = await componentList.getComponent('student');
-                    dispatch({login: false, getOtherStudents: true, currentuser: user, email: teacher, currentstudent: user, myswitch: "studentDash", checkURL: true, getChatroom:true });
+                    dispatch({login: false, getOtherStudents: true, currentuser: user, email: teacher, studentEmail:email, currentstudent: user, myswitch: "studentDash", checkURL: true, getChatroom:true });
                 }
                 else {
                     let user = await componentList.getComponent('user');
@@ -94,6 +99,10 @@ class AuthService {
                 }
             })
     }
+}
+async getOneUser(email, id, componentList){
+   const user = await firestore().collection("users").doc(email).collection("components").doc(id).get();
+   await componentList.addComponents(user.data);
 }
 async getOtherStudents(studentlist, email, componentList, id) {
     let rawData = []
@@ -144,14 +153,19 @@ async login(email, password, componentList, student, teacher) {
     return user;
 }
 
-async uploadPics(pic, name) {
+async uploadPics(pic, name, student) {
     const storageRef = storage().ref(name);
-    await storage().uploadBytes(storageRef, pic).then((snapshot) => {
-        console.log('Uploaded a blob or file!');
-    });
+    let task = storageRef.put(pic);            
+
+    task.then(() => {            
+        student.getPicSrc(name);
+         
+        console.log('Image uploaded to the bucket!');
+    }).catch((e) => console.log('uploading image error => ', e))
 }
 async downloadPics(name) {
     let src=await storage().ref(name).getDownloadURL()
+    return src
 }
 
 // async registerStudent(obj, email) {
@@ -364,7 +378,6 @@ export default new AuthService();
 // async uploadPics(pic, name) {
 //     const storageRef = ref(storage, name);
 //     await uploadBytes(storageRef, pic).then((snapshot) => {
-//         console.log('Uploaded a blob or file!');
 //     });
 // }
 
@@ -456,7 +469,6 @@ export default new AuthService();
 //         rawData = [data];
 //       } else {
 //         // doc.data() will be undefined in this case
-//         console.log("No such document!");
 //       }
        
 //         await componentList.addComponents(rawData, false);

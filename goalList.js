@@ -38,27 +38,27 @@ render(){
   // const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <View style={{width:'100%', paddingLeft:70}}>
+    <View style={{width:'100%', paddingLeft:60}}>
       <SafeAreaView>
         <ScrollView>
     {mainGoals.map((main, index)=>
     <View style={{marginTop:20}} key = {index}>
       <View style={{display:'flex', flexDirection:'row',  alignItems:'center'}}>
-    <Text > 
+    <Text style={{color:'black'}}> 
     <Checkbox checked={main.getJson().complete} check={this.check.bind(this, main)}  labelColor="#56ba8e" color="#56ba8e"/> 
     
     </Text>
-    <Text style={{marginBottom:5,fontSize:20, marginLeft:10}}>{main.getJson().title}</Text>  
+    <Text style={{marginBottom:5,fontSize:18, marginLeft:10, width:200, color:'black'}}>{main.getJson().title}</Text>  
     </View>
     {goals.map((goal, index)=>
     <View key={index}>
     {goal.getJson().mainID===main.getJson()._id &&(
-      <View style={{marginLeft:35, marginTop:5, display:'flex', flexDirection:'row',  alignItems:'center'}}>
-    <Text  > 
+      <View style={{marginLeft:30, marginTop:5, display:'flex', flexDirection:'row',  alignItems:'center'}}>
+    <Text  style={{color:'black'}}> 
       <Checkbox checked={main.getJson().complete} check={this.check.bind(this, goal)} labelColor="#56ba8e" color="#56ba8e" />
       
       </Text>
-      <Text style={{marginBottom:5,fontSize:20, marginLeft:10}}>{goal.getJson().title}</Text></View>
+      <Text style={{marginBottom:5,fontSize:16, marginLeft:10, width:225, color:'black'}}>{goal.getJson().title}</Text></View>
       )}
     </View>
     )}

@@ -154,7 +154,8 @@ class StudentService{
         let comp = props.app.state.currentstudent
         let component = comp.getJson();
         await comp.checked(day);
-        let sp = comp.checked[day] ? { addStarpoints: component.type } : { subStarpoints: component.type };
+        let sp = comp.getJson()?.checked[day] ? { addStarpoints: component.type } : { subStarpoints: component.type };
+
        props.app.dispatch({ ...sp, spRun: true, spid: component._id });
                 // if (component.time &&checked[day]) {
                 //         this.props.app.dispatch({ popupSwitch: "addTime", currentComponent: comp, forTime: day })

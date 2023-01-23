@@ -122,7 +122,7 @@ export default class Met extends Component {
         <Text style={styles.bpmTitle}>{bpm} BPM</Text>
         <TextInput
         
-      style={{width:80, height:50, backgroundColor:"white", borderWidth: 1, borderRadius:7,fontSize: 35, paddingLeft:5 }}
+      style={{width:80, height:50, backgroundColor:"white", borderWidth: 1, borderRadius:7,fontSize: 35, paddingLeft:5, color:'black' }}
         onChangeText={(text)=>{
           this.handleBpmChange(parseInt(text));
         }}
